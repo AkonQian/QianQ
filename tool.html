@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PNG to SVG and ICO Converter - PNGtoSVG&ICO</title>
+    <meta name="description" content="Upload a PNG, preview trace settings, and download SVG or ICO files.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2322c55e'/%3E%3Cpath d='M20 16h20l8 8v24H20z' fill='none' stroke='%23031008' stroke-width='5'/%3E%3Cpath d='M40 16v10h8M26 39h14' stroke='%23031008' stroke-width='5' fill='none'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="tool-page">
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html" aria-label="PNGtoSVG&ICO home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 5h7l7 7v7H5V5Z" stroke="currentColor" stroke-width="2"/><path d="M12 5v7h7" stroke="currentColor" stroke-width="2"/><path d="M8 16h8" stroke="currentColor" stroke-width="2"/></svg>
+          </span>
+          <span class="brand-text"><span>PNGto</span><span class="brand-light">SVG&ICO</span></span>
+        </a>
+        <p class="nav-welcome">Welcome, convert PNGs locally in your browser.</p>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>PNG to SVG and ICO Converter</h1>
+          <p>Drop a PNG, adjust trace settings, then download SVG markup or a multi-size ICO icon file. Use monochrome for logos, color blocks for flat graphics, or exact embed for fidelity.</p>
+          <div class="hero-actions">
+            <button class="button primary" type="button" data-choose-file>Choose PNG</button>
+            <button class="button ghost" type="button" data-sample>Try sample</button>
+            <button class="button" type="button" data-reset>Reset</button>
+          </div>
+        </div>
+
+        <section class="tool-shell" aria-label="PNG to SVG converter tool">
+          <div class="tool-topbar">
+            <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="tool-title">core-function/png-to-svg</div>
+          </div>
+          <div class="tool-grid">
+            <div class="workbench">
+              <label class="drop-zone" data-drop-zone>
+                <input data-file-input type="file" accept="image/png" hidden>
+                <span class="drop-inner">
+                  <span class="upload-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0 5 5m-5-5L7 9" stroke="currentColor" stroke-width="2"/><path d="M5 16v3h14v-3" stroke="currentColor" stroke-width="2"/></svg>
+                  </span>
+                  <h2>Drop PNG here</h2>
+                  <p>Transparent PNG icons and simple marks work best.</p>
+                </span>
+              </label>
+
+              <div class="preview-row">
+                <div class="preview-panel">
+                  <div class="panel-head"><span>Input PNG</span><span>Original</span></div>
+                  <div class="canvas-box" data-original-preview></div>
+                </div>
+                <div class="preview-panel">
+                  <div class="panel-head"><span>Output SVG</span><span>Download ready</span></div>
+                  <div class="canvas-box" data-svg-preview></div>
+                  <pre class="code-output" data-svg-code></pre>
+                </div>
+                <div class="preview-panel icon-preview-panel">
+                  <div class="panel-head"><span>Output ICO</span><span>Multi-size icon</span></div>
+                  <div class="canvas-box icon-canvas">
+                    <div class="icon-sizes" data-icon-sizes>
+                      <div class="icon-size">16</div>
+                      <div class="icon-size">32</div>
+                      <div class="icon-size">48</div>
+                      <div class="icon-size">64</div>
+                      <div class="icon-size">128</div>
+                      <div class="icon-size">256</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="settings" aria-label="Trace settings">
+              <h2>Trace settings</h2>
+              <div class="field">
+                <label for="detail">Detail</label>
+                <input id="detail" data-detail type="range" min="64" max="256" step="16" value="176">
+                <div class="range-line"><span>Fast</span><strong data-detail-value></strong></div>
+              </div>
+              <div class="field">
+                <label for="threshold">Threshold</label>
+                <input id="threshold" data-threshold type="range" min="8" max="248" step="4" value="150">
+                <div class="range-line"><span>Light</span><strong data-threshold-value></strong></div>
+              </div>
+              <div class="field">
+                <label for="noise">Noise filter</label>
+                <input id="noise" data-noise type="range" min="1" max="8" step="1" value="2">
+                <div class="range-line"><span>Pixels</span><strong data-noise-value></strong></div>
+              </div>
+              <div class="field mode-field">
+                <div class="radio-label">Mode</div>
+                <div class="mode-list">
+                  <label class="mode-option">
+                    <input type="radio" name="mode" value="mono" checked>
+                    <span><strong>Monochrome trace</strong><span>Best for logos and icons.</span></span>
+                  </label>
+                  <label class="mode-option">
+                    <input type="radio" name="mode" value="color">
+                    <span><strong>Color blocks</strong><span>Posterized SVG rectangles.</span></span>
+                  </label>
+                  <label class="mode-option">
+                    <input type="radio" name="mode" value="embed">
+                    <span><strong>Exact embed</strong><span>Preserves the PNG inside SVG.</span></span>
+                  </label>
+                </div>
+              </div>
+              <div class="stats" data-stats></div>
+              <div class="export-actions">
+                <button class="button primary" type="button" data-download disabled>Download SVG</button>
+                <button class="button" type="button" data-download-icon disabled>Download ICO</button>
+              </div>
+              <button class="button full" type="button" data-copy disabled>Copy SVG</button>
+            </aside>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
